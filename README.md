@@ -154,3 +154,60 @@ Completion
 
 This project helped me understand the basics of Flutter development, widgets, project organization, emulator setup, and cross-platform app creation.
 
+• Integrated Even/Odd Checker
+
+I added the Even/Odd Checker App into my existing Flutter project.
+It uses a TextField, a button, and a conditional check to display whether a number is even or odd.
+
+"C:\Users\MEET\OneDrive\Pictures\Screenshots\Screenshot 2025-12-08 091631.png"
+
+JIT vs AOT Compilation 
+• JIT (Just-In-Time)
+
+Used during development.
+
+Compiles code while the app is running.
+
+Enables Hot Reload, making development fast.
+
+Slower startup compared to AOT.
+
+• AOT (Ahead-Of-Time)
+
+Used when building a release version.
+
+Code is compiled before the app runs.
+
+Leads to faster startup and better performance.
+
+No Hot Reload.
+
+How I Used Dart Conditionals for Even/Odd Check
+
+I used the % modulus operator to check the remainder:
+
+if (n % 2 == 0) {
+  result = "$n is EVEN";
+} else {
+  result = "$n is ODD";
+}
+
+
+This simple conditional lets me decide which output to show on the screen.
+
+How I Used String Interpolation
+
+String interpolation lets me insert variables directly inside strings:
+
+"$n is EVEN"
+
+
+Instead of writing:
+
+n.toString() + " is EVEN"
+
+
+This makes the code cleaner and easier to read.
+
+Final Code Snippet Added into Project
+result = n % 2 == 0 ? "$n is EVEN" : "$n is ODD";
