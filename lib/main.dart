@@ -4,76 +4,56 @@ void main() {
   runApp(const MyApp());
 }
 
+
+class Log {
+  String action;
+  DateTime timestamp;
+  String status;
+
+  Log(this.action, this.timestamp, this.status);
+}
+
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text("Even or Odd Checker"),
-        ),
-        body: const EvenOddApp(),
-      ),
+    return const MaterialApp(
+      home: LogScreen(),
     );
   }
 }
 
-class EvenOddApp extends StatefulWidget {
-  const EvenOddApp({super.key});
-
-  @override
-  State<EvenOddApp> createState() => _EvenOddAppState();
-}
-
-class _EvenOddAppState extends State<EvenOddApp> {
-  final TextEditingController numberController = TextEditingController();
-  String resultMessage = "";
+class LogScreen extends StatelessWidget {
+  const LogScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(20),
-      child: Column(
-        children: [
-          TextField(
-            controller: numberController,
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-              labelText: "Enter a number",
-              border: OutlineInputBorder(),
-            ),
-          ),
+    List<Log> logs = [
+      Log("User Logged In", DateTime.now(), "Success"),
+      Log("Profile Updated", DateTime.now().subtract(const Duration(minutes: 10)), "Success"),
+      Log("Password Attempt Failed", DateTime.now().subtract(const Duration(hours: 1)), "Failed"),
+      Log("Data Synced", DateTime.now().subtract(const Duration(days: 1)), "Success"),
+    ];
 
-          const SizedBox(height: 20),
 
-          ElevatedButton(
-            onPressed: () {
-              String input = numberController.text;
-              int number = int.parse(input);
-
-              if (number % 2 == 0) {
-                resultMessage = "The number $number is Even.";
-              } else {
-                resultMessage = "The number $number is Odd.";
-              }
-
-              setState(() {});
-            },
-            child: const Text("Check"),
-          ),
-
-          const SizedBox(height: 20),
-
-          Text(
-            resultMessage,
-            style: const TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
+    return Scaffold(
+      appBar: AppBar(title: const Text("Activity Logs")),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: logs.map((log) {
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 12),
+              child: Text(
+                "${log.action} • ${log.timestamp.toString()} • ${log.status}",
+                style: const TextStyle(fontSize: 16),
+              ),
+            );
+          }).toList(), // Convert map to list
+        ),
       ),
     );
   }
