@@ -156,7 +156,8 @@ https://github.com/Meetkadam81/cyberlog
 This project helped me understand the basics of Flutter development, widgets, project organization, emulator setup, and cross-platform app creation.
 
 ## Log Class System – Explanation
-1. Class Definition
+
+### 1. Class Definition
 
 A Log class was created to store structured log information.
 It contains:
@@ -169,7 +170,7 @@ String status – success/failed
 
 This allows clean, organized data handling instead of using messy strings.
 
-2. Creating a List of Log Objects
+### 2. Creating a List of Log Objects
 
 Inside a StatelessWidget (LogScreen), a list of sample logs was created:
 
@@ -182,7 +183,7 @@ Log("Password Attempt Failed", ... ),
 
 This demonstrates how objects store real application data.
 
-3. Rendering UI Using Loops
+### 3. Rendering UI Using Loops
 
 The Flutter UI uses .map() to loop through the list and generate a widget for each log.
 
@@ -193,7 +194,7 @@ return Text("${log.action} • ${log.timestamp} • ${log.status}");
 
 This is more efficient than writing multiple widgets manually and is useful when logs come from a backend or database.
 
-4. Why This Is Useful
+### 4. Why This Is Useful
 
 Classes keep your code organized
 

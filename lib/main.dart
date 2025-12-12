@@ -4,55 +4,61 @@ void main() {
   runApp(const MyApp());
 }
 
-
-class Log {
-  String action;
-  DateTime timestamp;
-  String status;
-
-  Log(this.action, this.timestamp, this.status);
-}
-
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: LogScreen(),
+    return MaterialApp(
+      title: 'Portfolio Assignment',
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: const HomeScreen(),
     );
   }
 }
 
-class LogScreen extends StatelessWidget {
-  const LogScreen({super.key});
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    List<Log> logs = [
-      Log("User Logged In", DateTime.now(), "Success"),
-      Log("Profile Updated", DateTime.now().subtract(const Duration(minutes: 10)), "Success"),
-      Log("Password Attempt Failed", DateTime.now().subtract(const Duration(hours: 1)), "Failed"),
-      Log("Data Synced", DateTime.now().subtract(const Duration(days: 1)), "Success"),
-    ];
-
-
     return Scaffold(
-      appBar: AppBar(title: const Text("Activity Logs")),
+      appBar: AppBar(
+        title: const Text("Portfolio Dashboard"),
+        centerTitle: true,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: logs.map((log) {
-            return Padding(
-              padding: const EdgeInsets.only(bottom: 12),
-              child: Text(
-                "${log.action} • ${log.timestamp.toString()} • ${log.status}",
-                style: const TextStyle(fontSize: 16),
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // First card
+            Container(
+              padding: const EdgeInsets.all(20),
+              margin: const EdgeInsets.only(bottom: 16),
+              decoration: BoxDecoration(
+                color: Colors.orange[100],
+                borderRadius: BorderRadius.circular(12),
               ),
-            );
-          }).toList(), // Convert map to list
+              child: const Text(
+                "Card 1: Profile Overview",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              ),
+            ),
+
+            // Second card
+            Container(
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Colors.purple[100],
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: const Text(
+                "Card 2: Recent Projects",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              ),
+            ),
+          ],
         ),
       ),
     );
