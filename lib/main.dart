@@ -9,53 +9,93 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Portfolio Assignment',
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: const HomeScreen(),
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: HomeDashboardScreen(),
     );
   }
 }
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+/* ---------------- DASHBOARD SCREEN ---------------- */
+
+class HomeDashboardScreen extends StatelessWidget {
+  const HomeDashboardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Portfolio Dashboard"),
+        title: const Text('CyberLog Dashboard'),
         centerTitle: true,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            // First card
-            Container(
-              padding: const EdgeInsets.all(20),
-              margin: const EdgeInsets.only(bottom: 16),
-              decoration: BoxDecoration(
-                color: Colors.orange[100],
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: const Text(
-                "Card 1: Profile Overview",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-              ),
+        padding: const EdgeInsets.all(12),
+        child: GridView.count(
+          crossAxisCount: 2,
+          crossAxisSpacing: 12,
+          mainAxisSpacing: 12,
+          children: const [
+            DashboardCard(
+              title: 'Daily Log',
+              icon: Icons.today,
+              color: Colors.blue,
             ),
+            DashboardCard(
+              title: 'Cyber Tips',
+              icon: Icons.security,
+              color: Colors.green,
+            ),
+            DashboardCard(
+              title: 'Device Security',
+              icon: Icons.phonelink_lock,
+              color: Colors.orange,
+            ),
+            DashboardCard(
+              title: 'Notes',
+              icon: Icons.note,
+              color: Colors.purple,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
 
-            // Second card
-            Container(
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: Colors.purple[100],
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: const Text(
-                "Card 2: Recent Projects",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+/* ---------------- DASHBOARD CARD ---------------- */
+
+class DashboardCard extends StatelessWidget {
+  final String title;
+  final IconData icon;
+  final Color color;
+
+  const DashboardCard({
+    super.key,
+    required this.title,
+    required this.icon,
+    required this.color,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: color.withOpacity(0.15),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: color, width: 1.2),
+      ),
+      child: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(icon, size: 40, color: color),
+            const SizedBox(height: 10),
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: color,
               ),
             ),
           ],
@@ -64,3 +104,4 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+=
