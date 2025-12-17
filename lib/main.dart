@@ -11,97 +11,109 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeDashboardScreen(),
+      home: MainNavigationScreen(),
     );
   }
 }
 
-/* ---------------- DASHBOARD SCREEN ---------------- */
+/* ================= MAIN NAVIGATION ================= */
 
-class HomeDashboardScreen extends StatelessWidget {
-  const HomeDashboardScreen({super.key});
+class MainNavigationScreen extends StatefulWidget {
+  const MainNavigationScreen({super.key});
+
+  @override
+  State<MainNavigationScreen> createState() => _MainNavigationScreenState();
+}
+
+class _MainNavigationScreenState extends State<MainNavigationScreen> {
+  int _currentIndex = 0;
+
+  final List<Widget> _pages = const [
+    HomeScreen(),
+    LogsScreen(),
+    SettingsScreen(),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('CyberLog Dashboard'),
+        title: const Text('CyberLog'),
         centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(12),
-        child: GridView.count(
-          crossAxisCount: 2,
-          crossAxisSpacing: 12,
-          mainAxisSpacing: 12,
-          children: const [
-            DashboardCard(
-              title: 'Daily Log',
-              icon: Icons.today,
-              color: Colors.blue,
-            ),
-            DashboardCard(
-              title: 'Cyber Tips',
-              icon: Icons.security,
-              color: Colors.green,
-            ),
-            DashboardCard(
-              title: 'Device Security',
-              icon: Icons.phonelink_lock,
-              color: Colors.orange,
-            ),
-            DashboardCard(
-              title: 'Notes',
-              icon: Icons.note,
-              color: Colors.purple,
-            ),
-          ],
-        ),
+
+      body: _pages[_currentIndex],
+
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list_alt),
+            label: 'Logs',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
+          ),
+        ],
       ),
     );
   }
 }
 
-/* ---------------- DASHBOARD CARD ---------------- */
+/* ================= HOME SCREEN ================= */
 
-class DashboardCard extends StatelessWidget {
-  final String title;
-  final IconData icon;
-  final Color color;
-
-  const DashboardCard({
-    super.key,
-    required this.title,
-    required this.icon,
-    required this.color,
-  });
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: color.withOpacity(0.15),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: color, width: 1.2),
-      ),
-      child: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(icon, size: 40, color: color),
-            const SizedBox(height: 10),
-            Text(
-              title,
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: color,
-              ),
-            ),
-          ],
-        ),
+    return const Center(
+      child: Text(
+        'Home Dashboard',
+        style: TextStyle(fontSize: 20),
       ),
     );
   }
 }
-=
+
+/* ================= LOGS SCREEN ================= */
+
+class LogsScreen extends StatelessWidget {
+  const LogsScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Text(
+        'Logs Page',
+        style: TextStyle(fontSize: 20),
+      ),
+    );
+  }
+}
+
+/* ================= SETTINGS SCREEN ================= */
+
+class SettingsScreen extends StatelessWidget {
+  const SettingsScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Text(
+        'Settings Page',
+        style: TextStyle(fontSize: 20),
+      ),
+    );
+  }
+}
