@@ -3,12 +3,15 @@ import 'package:hive/hive.dart';
 part 'vault_item.g.dart';
 
 @HiveType(typeId: 0)
-class VaultItem {
+class VaultItem extends HiveObject {
   @HiveField(0)
-  final String title;
+  String title;
 
   @HiveField(1)
-  final String secret;
+  String secret;
 
-  VaultItem(this.title, this.secret);
+  VaultItem({
+    required this.title,
+    required this.secret,
+  });
 }

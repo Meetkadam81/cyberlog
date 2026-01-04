@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'screenA.dart';
-import 'screenb.dart';
-import 'screenc.dart';
+import 'screens/dashboardscreen.dart';
+import 'screens/gatekeeperscreen.dart';
+import 'screens/vaultscreen.dart';
 
-class AppRoutes {
-  static final Map<String, WidgetBuilder> routes = {
-    '/': (context) => const ScreenA(),
-    '/screenB': (context) => const ScreenB(),
-    '/screenC': (context) => const ScreenC(),
-  };
-}
+final Map<String, WidgetBuilder> appRoutes = {
+  '/': (_) => const DashboardScreen(),
+  '/gate': (_) => const GatekeeperScreen(),
+  '/vault': (_) => const VaultScreen(),
+};

@@ -1,7 +1,7 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import '../services/networkservice.dart';
-import '../services/deviceservice.dart';
-import '../services/securityfeedservice.dart';
+import 'package:http/http.dart' as http;
+import 'package:device_info_plus/device_info_plus.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -17,41 +17,59 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   void initState() {
     super.initState();
-    loadData();
+    fetchIP();
+    fetchDevice();
   }
 
-  void loadData() async {
-    ip = await NetworkService.getPublicIP();
-    device = await DeviceService.getDeviceInfo();
-    setState(() {});
+  Future<void> fetchIP() async {
+    try {
+      final res =
+      await http.get(Uri.parse('https://api.ipify.org?format=json'));
+      final data = jsonDecode(res.body);
+      setState(() => ip = data['ip']);
+    } catch (e) {
+      setState(() => ip = 'Failed to fetch IP');
+    }
+  }
+
+  Future<void> fetchDevice() async {
+    final info = await DeviceInfoPlugin().androidInfo;
+    setState(() {
+      device = '${info.model} | Android ${info.version.release}';
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    final tips = SecurityFeedService.getTips();
-
     return Scaffold(
-      appBar: AppBar(title: const Text("CyberShield Dashboard")),
+      appBar: AppBar(title: const Text("🛡 Security Dashboard")),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Device: $device"),
+            Text("📱 Device: $device",
+                style: const TextStyle(fontSize: 16)),
             const SizedBox(height: 8),
-            Text("Public IP: $ip"),
-            const SizedBox(height: 16),
-            const Text("Security Feed",
-                style: TextStyle(fontSize: 18)),
-            Expanded(
-              child: ListView.builder(
-                itemCount: tips.length,
-                itemBuilder: (_, i) => ListTile(
-                  leading: const Icon(Icons.security),
-                  title: Text(tips[i]),
-                ),
-              ),
+            Text("🌐 Public IP: $ip",
+                style: const TextStyle(fontSize: 16)),
+            const SizedBox(height: 24),
+            const Text(
+              "🔒 Security Tips",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
+            const SizedBox(height: 10),
+            Expanded(
+              child: ListView(
+                children: const [
+                  ListTile(title: Text("Use strong, unique passwords")),
+                  ListTile(title: Text("Enable 2FA on all accounts")),
+                  ListTile(title: Text("Avoid public Wi-Fi networks")),
+                  ListTile(title: Text("Keep your OS up to date")),
+                  ListTile(title: Text("Lock sensitive apps")),
+                ],
+              ),
+            )
           ],
         ),
       ),

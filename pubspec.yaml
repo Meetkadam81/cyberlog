@@ -30,7 +30,17 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  shared_preferences: ^2.2.2
+  provider: ^6.0.5
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  encrypt: ^5.0.3
+  local_auth: ^2.3.0
+  device_info_plus: ^9.1.0
+  http: ^1.1.0
+
+
+
+
 
 
 
@@ -39,6 +49,8 @@ dependencies:
   cupertino_icons: ^1.0.8
 
 dev_dependencies:
+  hive_generator: ^2.0.1
+  build_runner: ^2.4.6
   flutter_test:
     sdk: flutter
 

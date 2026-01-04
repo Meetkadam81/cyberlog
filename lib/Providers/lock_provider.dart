@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 
 class LockProvider extends ChangeNotifier {
-  bool _isUnlocked = false;
-
-  bool get isUnlocked => _isUnlocked;
+  bool unlocked = false;
 
   void unlock() {
-    _isUnlocked = true;
+    unlocked = true;
     notifyListeners();
   }
 
   void lock() {
-    _isUnlocked = false;
+    unlocked = false;
     notifyListeners();
   }
 }
