@@ -1,149 +1,147 @@
-cyberlog – Flutter Portfolio Project
+# CyberLog – Flutter Portfolio Project
 
-This project is part of my Flutter and mobile application development learning journey. It demonstrates the fundamentals of Flutter, including project setup, widget usage, emulator execution, and cross-platform development.
+CyberLog is a Flutter-based portfolio project developed as part of my learning journey in **Flutter and mobile application development**. The project demonstrates core Flutter concepts, Android integration, and permission-based features while following clean project structure and best practices.
 
-The app displays simple contact information, includes a counter feature, and integrates an Even/Odd Checker using Dart conditionals.
+This application serves as a foundation-level project showcasing UI construction, state management, Dart logic, and Android runtime permissions.
 
-Project Overview
+---
 
-Built using Flutter
+## Project Overview
 
-Runs on Android emulator
+* Built using **Flutter**
+* Runs on **Android Emulator**
+* Demonstrates **core Flutter concepts**
+* Uses **basic widgets and state management**
+* Implements **logical condition handling in Dart**
+* Includes **Android permission-based features**
 
-Demonstrates core Flutter concepts
+---
 
-Uses basic widgets and state management
+## Application Features
 
-Includes logical condition handling in Dart
+### 1. Contact Information Display
 
-What I Learned
-Native vs Cross-Platform Development
+Displays basic contact details using Flutter widgets:
 
-Native applications are developed separately for each platform:
+* Name
+* Phone number
 
-Android: Java / Kotlin
+### 2. Counter Feature
 
-iOS: Swift
+* Uses a Floating Action Button (FAB)
+* Increments a counter value using `setState()`
+* Demonstrates StatefulWidget behavior
 
-Flutter enables cross-platform development, allowing a single codebase to run on:
+### 3. Even / Odd Checker
 
-Android
+An Even/Odd checker implemented using Dart conditionals.
 
-iOS
+**Functionality:**
 
-Web
+* User enters a number
+* Presses a button
+* App displays whether the number is EVEN or ODD
 
-Windows
+---
 
-macOS
+## Permission-Based Features (Android)
 
-Linux
+CyberLog implements Android permission-based features following modern Android and Flutter best practices.
 
-Hot Reload
+### Permissions Used
 
-Hot Reload allows instant UI updates without restarting the entire app, making development faster and more efficient.
+* Camera
+* Storage (Gallery access)
+* Internet
 
-Widgets
+### Features Implemented
 
-Everything in Flutter is a widget.
+* Runtime permission request handling
+* Camera access using permission validation
+* Gallery image selection using storage permission
+* Internet permission declared for API usage
 
-StatelessWidget: UI does not change once built
+### Technologies Used
 
-StatefulWidget: UI updates dynamically based on state
+* Flutter
+* Kotlin (Android)
+* `permission_handler` plugin
+* `image_picker` plugin
 
-By combining widgets, complex user interfaces can be built easily.
+### Compliance
 
-Installation & Execution Steps
-1. Install Flutter
+* Android Runtime Permission Model
+* Flutter Android Embedding v2
 
-Flutter SDK was downloaded from the official Flutter website.
+---
 
-2. Verify Installation
-   flutter doctor
+## Dart Concepts Used
 
+### Conditionals
 
-This command checks Flutter SDK, Android tools, Android Studio, and device setup.
-
-3. Create the Flutter Project
-   flutter create cyberlog
-
-4. Run the Application
-
-Open an Android emulator using Android Studio
-
-Run the app using:
-
-flutter run
-
-
-The application launches successfully on the emulator.
-
-Application Features
-Contact Information Display
-
-The app displays basic contact details using Flutter widgets:
-
-Name
-
-Phone number
-
-Counter Feature
-
-A floating action button increments a counter value using setState().
-
-Even / Odd Checker
-
-An Even/Odd Checker feature was added to the project.
-
-Functionality:
-
-User enters a number
-
-Presses a button
-
-App displays whether the number is EVEN or ODD
-
-Dart Concepts Used
-Conditionals
+```dart
 if (n % 2 == 0) {
-result = "$n is EVEN";
+  result = "$n is EVEN";
 } else {
-result = "$n is ODD";
+  result = "$n is ODD";
 }
+```
 
-Ternary Operator
+### Ternary Operator
+
+```dart
 result = n % 2 == 0 ? "$n is EVEN" : "$n is ODD";
+```
 
-String Interpolation
+### String Interpolation
+
+```dart
 "$n is EVEN"
+```
 
+This approach is cleaner and more readable than traditional string concatenation.
 
-This is cleaner and more readable than:
+---
 
-n.toString() + " is EVEN";
+## Flutter Concepts Learned
 
-JIT vs AOT Compilation
-JIT (Just-In-Time)
+### Widgets
 
-Used during development
+* Everything in Flutter is a widget
+* **StatelessWidget**: UI does not change after build
+* **StatefulWidget**: UI updates dynamically based on state
 
-Enables Hot Reload
+Complex user interfaces are built by composing smaller widgets together.
 
-Compiles code while app is running
+### Hot Reload
 
-Slightly slower startup
+* Allows instant UI updates without restarting the app
+* Significantly improves development speed
+* Available during development using JIT compilation
 
-AOT (Ahead-Of-Time)
+---
 
-Used in release builds
+## JIT vs AOT Compilation
 
-Compiles code before execution
+### JIT (Just-In-Time)
 
-Faster startup and better performance
+* Used during development
+* Enables Hot Reload
+* Compiles code while the app is running
+* Slightly slower startup
 
-Hot Reload not available
+### AOT (Ahead-Of-Time)
 
-Project Structure
+* Used in release builds
+* Compiles code before execution
+* Faster startup and better runtime performance
+* Hot Reload not available
+
+---
+
+## Project Structure
+
+```text
 cyberlog/
 ├── lib/
 ├── android/
@@ -152,98 +150,87 @@ cyberlog/
 ├── test/
 ├── screenshots/
 └── README.md
+```
 
-Main Code Example
+---
+
+## Installation & Execution Steps
+
+### 1. Install Flutter
+
+The Flutter SDK was downloaded from the official Flutter website.
+
+### 2. Verify Installation
+
+```bash
+flutter doctor
+```
+
+This command checks Flutter SDK, Android tools, Android Studio, and device setup.
+
+### 3. Create the Flutter Project
+
+```bash
+flutter create cyberlog
+```
+
+### 4. Run the Application
+
+* Open an Android emulator using Android Studio
+* Run the application using:
+
+```bash
+flutter run
+```
+
+The application launches successfully on the emulator.
+
+---
+
+## Sample Code Snippet
+
+```dart
 import 'package:flutter/material.dart';
 
 void main() {
-runApp(const MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-const MyApp({super.key});
+  const MyApp({super.key});
 
-@override
-Widget build(BuildContext context) {
-return MaterialApp(
-title: 'Flutter Demo',
-theme: ThemeData(
-colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-useMaterial3: true,
-),
-home: const MyHomePage(title: 'Flutter Demo Home Page'),
-);
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    );
+  }
 }
-}
+```
 
-class MyHomePage extends StatefulWidget {
-const MyHomePage({super.key, required this.title});
-final String title;
+---
 
-@override
-State<MyHomePage> createState() => _MyHomePageState();
-}
+## GitHub Repository
 
-class _MyHomePageState extends State<MyHomePage> {
-int _counter = 0;
+🔗 [https://github.com/Meetkadam81/cyberlog](https://github.com/Meetkadam81/cyberlog)
 
-void _incrementCounter() {
-setState(() {
-_counter++;
-});
-}
+---
 
-@override
-Widget build(BuildContext context) {
-return Scaffold(
-appBar: AppBar(
-backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-title: Text(widget.title),
-),
-body: Center(
-child: Column(
-mainAxisAlignment: MainAxisAlignment.center,
-children: [
-const Text(
-"Name: Meet\nPhone Number: +91XXXXXXXXXX",
-textAlign: TextAlign.center,
-style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-),
-const SizedBox(height: 30),
-const Text('You have pushed the button this many times:'),
-Text(
-'$_counter',
-style: Theme.of(context).textTheme.headlineMedium,
-),
-],
-),
-),
-floatingActionButton: FloatingActionButton(
-onPressed: _incrementCounter,
-child: const Icon(Icons.add),
-),
-);
-}
-}
+## Conclusion
 
-GitHub Repository
+This project helped me gain practical understanding of:
 
-https://github.com/Meetkadam81/cyberlog
+* Flutter project structure
+* Widget-based UI development
+* State management basics
+* Dart conditionals and logic
+* Android emulator setup
+* Permission handling in Android
+* Cross-platform mobile development using Flutter
 
-Conclusion
-
-This project helped me understand:
-
-Flutter project structure
-
-Widgets and UI building
-
-Emulator setup
-
-Dart conditionals
-
-State management basics
-
-Cross-platform mobile development
-
-It serves as a strong foundation for more advanced Flutter applications.
+CyberLog serves as a strong foundation for building more advanced Flutter applications in the future.
